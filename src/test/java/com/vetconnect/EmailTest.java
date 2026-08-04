@@ -26,4 +26,20 @@ public class EmailTest {
         Email email = new Email(" Amirholya01@Test.COM ");
         assertEquals("amirholya01@test.com", email.value());
     }
+
+    @Test
+    void should_throw_exception_when_email_is_null() {
+        assertThrows(
+                NullPointerException.class,
+                () -> new Email(null)
+        );
+    }
+
+    @Test
+    void should_throw_exception_when_email_is_blank() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new Email("     ")
+        );
+    }
 }

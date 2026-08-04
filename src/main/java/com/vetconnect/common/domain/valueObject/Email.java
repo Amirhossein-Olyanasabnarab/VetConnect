@@ -11,12 +11,14 @@ public record Email(String value) {
     public Email {
         Objects.requireNonNull(value, "Email can not be null");
 
-        value = value.trim().toLowerCase();
+        String normalizedEmail = value.trim().toLowerCase();
 
-        if (value.isBlank())
+        if (normalizedEmail.isBlank())
             throw new IllegalArgumentException("Email can not be blank");
 
-        if (!EMAIL_PATTERN.matcher(value).matches())
+        if (!EMAIL_PATTERN.matcher(normalizedEmail).matches())
             throw new IllegalArgumentException("Invalid email format");
+
+        value = normalizedEmail;
     }
 }
